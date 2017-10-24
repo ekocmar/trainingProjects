@@ -18,7 +18,7 @@ public class NumberOfDays
     private void init() throws IOException
     {
         numberOfDays = new int[12];
-        File f = new File("C:\\Users\\eemrkoc\\Documents\\GitHub\\trainingProjects\\BirthdayParadox\\resources\\numberofdays.txt");
+        File f = new File("resources\\numberofdays.txt");
         FileReader fr = new FileReader(f);
         try(BufferedReader br = new BufferedReader(fr))
         {
@@ -32,7 +32,6 @@ public class NumberOfDays
         }
         catch (FileNotFoundException e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             fr.close();
         }
