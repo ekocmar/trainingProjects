@@ -13,7 +13,6 @@ public class Main
         bdayParadox.calculateBdayParadox(bdayGen.getBirthdays());
         // bdayParadox.printBirthdayCollision();
         bdayParadox.printBdayCollasMatrix();
-        
     }
 
 }
