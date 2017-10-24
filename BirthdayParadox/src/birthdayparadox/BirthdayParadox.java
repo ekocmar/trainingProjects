@@ -90,7 +90,8 @@ public class BirthdayParadox
     public void printBdayCollasMatrix()
     {
 
-        System.out.println("Days  :  |1  |2  |3  |4  |5  |6  |7  |8  |9  |10 |11 |12 |13 |14 |15 |16 |17 |18 |19 |20 |21 |22 |23 |24 |25 |26 |27 |28 |29 |30 |31");
+        System.out.println("Days  :  |1  |2  |3  |4  |5  |6  |7  |8  |9  |10 |11 |12 |13 |14 |15 |16 |17 |18 |19 |20 |21 |22 |23 |24 |25 |26 |27 |28 |29 |30 |31 |");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < placedBdays.length; i++)
         {
             for (int j = 0; j < placedBdays[i].length; j++)
@@ -98,9 +99,19 @@ public class BirthdayParadox
                 if (j == 0)
                 {
                     if (i < 9)
-                        System.out.print("Month " + (i + 1) + "  |" + placedBdays[i][j] + "  |");
+                    {
+                        if (placedBdays[i][j] < 10)
+                            System.out.print("Month " + (i + 1) + "  |" + placedBdays[i][j] + "  |");
+                        else
+                            System.out.print("Month " + (i + 1) + "  |" + placedBdays[i][j] + " |");
+                    }
                     else
-                        System.out.print("Month " + (i + 1) + " |" + placedBdays[i][j] + "  |");
+                    {
+                        if (placedBdays[i][j] < 10)
+                            System.out.print("Month " + (i + 1) + " |" + placedBdays[i][j] + "  |");
+                        else
+                            System.out.print("Month " + (i + 1) + " |" + placedBdays[i][j] + " |");
+                    }
                 }
                 else
                 {
