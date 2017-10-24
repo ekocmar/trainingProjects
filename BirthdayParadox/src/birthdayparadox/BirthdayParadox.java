@@ -56,15 +56,18 @@ public class BirthdayParadox
                 {
                     remaining = remaining - placedBdays[j].length;
                 }
-                else if (remaining == 0)
-                {
-                    placedBdays[j][remaining]++;
-                    break;
-                }
                 else
                 {
-                    placedBdays[j][remaining - 1]++;
-                    break;
+                    if (remaining == 0)
+                    {
+                        placedBdays[j][remaining]++;
+                        break;
+                    }
+                    else
+                    {
+                        placedBdays[j][remaining - 1]++;
+                        break;
+                    }
                 }
             }
         }
@@ -81,6 +84,33 @@ public class BirthdayParadox
                     System.out.println("Month:" + (i + 1) + " Day:" + (j + 1) + " Collision Count:" + placedBdays[i][j]);
                 }
             }
+        }
+    }
+
+    public void printBdayCollasMatrix()
+    {
+
+        System.out.println("Days  :  |1  |2  |3  |4  |5  |6  |7  |8  |9  |10 |11 |12 |13 |14 |15 |16 |17 |18 |19 |20 |21 |22 |23 |24 |25 |26 |27 |28 |29 |30 |31");
+        for (int i = 0; i < placedBdays.length; i++)
+        {
+            for (int j = 0; j < placedBdays[i].length; j++)
+            {
+                if (j == 0)
+                {
+                    if (i < 9)
+                        System.out.print("Month " + (i + 1) + "  |");
+                    else
+                        System.out.print("Month " + (i + 1) + " |");
+                }
+                else
+                {
+                    if (placedBdays[i][j] < 10)
+                        System.out.print(placedBdays[i][j] + "  |");
+                    else
+                        System.out.print(placedBdays[i][j] + " |");
+                }
+            }
+            System.out.print("\n");
         }
     }
 

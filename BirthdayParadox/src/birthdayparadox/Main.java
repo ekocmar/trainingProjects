@@ -11,7 +11,8 @@ public class Main
         BirthdayParadox bdayParadox = new BirthdayParadox();
 
         bdayParadox.calculateBdayParadox(bdayGen50.getBirthdays());
-        bdayParadox.printBirthdayCollision();
+        // bdayParadox.printBirthdayCollision();
+        bdayParadox.printBdayCollasMatrix();
     }
 
 }
