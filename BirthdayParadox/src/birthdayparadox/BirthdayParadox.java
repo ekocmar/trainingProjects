@@ -3,31 +3,18 @@ package birthdayparadox;
 public class BirthdayParadox
 {
     private int placedBdays[][];
-    private int numberOfDays[];
+    private NumberOfDays numberOfDays;
 
-    private void init()
+    private void init() throws Exception
     {
-        numberOfDays = new int[12];
-        numberOfDays[0] = 31;
-        numberOfDays[1] = 29;
-        numberOfDays[2] = 31;
-        numberOfDays[3] = 30;
-        numberOfDays[4] = 31;
-        numberOfDays[5] = 30;
-        numberOfDays[6] = 31;
-        numberOfDays[7] = 31;
-        numberOfDays[8] = 30;
-        numberOfDays[9] = 31;
-        numberOfDays[10] = 30;
-        numberOfDays[11] = 31;
-
+        numberOfDays = new NumberOfDays();
         // init rows of placedBdays
         placedBdays = new int[12][];
 
         // init columbs of each row
         for (int i = 0; i < placedBdays.length; i++)
         {
-            placedBdays[i] = new int[numberOfDays[i]];
+            placedBdays[i] = new int[(numberOfDays.getNumberOfDays())[i]];
         }
 
         // init first values as 0
@@ -40,7 +27,7 @@ public class BirthdayParadox
         }
     }
 
-    public BirthdayParadox()
+    public BirthdayParadox() throws Exception
     {
         this.init();
     }
@@ -125,7 +112,7 @@ public class BirthdayParadox
         }
     }
 
-    public int[][] getBirthdayMatrix()
+    public int[][] getBirthdayMatrix() throws Exception
     {
         if (this.placedBdays != null)
             return this.placedBdays;
