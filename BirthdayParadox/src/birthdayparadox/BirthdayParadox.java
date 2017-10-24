@@ -2,8 +2,8 @@ package birthdayparadox;
 
 public class BirthdayParadox
 {
-    int placedBdays[][];
-    int numberOfDays[];
+    private int placedBdays[][];
+    private int numberOfDays[];
 
     private void init()
     {
@@ -98,9 +98,9 @@ public class BirthdayParadox
                 if (j == 0)
                 {
                     if (i < 9)
-                        System.out.print("Month " + (i + 1) + "  |");
+                        System.out.print("Month " + (i + 1) + "  |" + placedBdays[i][j] + "  |");
                     else
-                        System.out.print("Month " + (i + 1) + " |");
+                        System.out.print("Month " + (i + 1) + " |" + placedBdays[i][j] + "  |");
                 }
                 else
                 {

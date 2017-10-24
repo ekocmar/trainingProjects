@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class BirthdayGenerator
 {
-    int birthdays[];
-    Random rand;
+    private int birthdays[];
+    private Random rand;
 
     public int[] getBirthdays()
     {
