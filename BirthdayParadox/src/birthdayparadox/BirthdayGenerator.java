@@ -1,11 +1,10 @@
 package birthdayparadox;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class BirthdayGenerator
 {
     private int birthdays[];
-    private Random rand;
 
     public int[] getBirthdays()
     {
@@ -19,13 +18,11 @@ public class BirthdayGenerator
 
     public BirthdayGenerator()
     {
-        this.rand = new Random(System.currentTimeMillis());
         this.birthdays = new int[50];
     }
 
     public BirthdayGenerator(int size)
     {
-        this.rand = new Random(System.currentTimeMillis());
         this.birthdays = new int[size];
     }
 
@@ -33,7 +30,7 @@ public class BirthdayGenerator
     {
         for (int i = 0; i < this.birthdays.length; i++)
         {
-            this.birthdays[i] = rand.nextInt(365);
+            this.birthdays[i] = ThreadLocalRandom.current().nextInt(1, 365);
         }
     }
 
