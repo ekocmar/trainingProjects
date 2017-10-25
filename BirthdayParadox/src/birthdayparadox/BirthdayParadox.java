@@ -4,6 +4,7 @@ public class BirthdayParadox
 {
     private int placedBdays[][];
     private NumberOfDays numberOfDays;
+    private int totalCollision;
 
     private void init() throws Exception
     {
@@ -55,6 +56,17 @@ public class BirthdayParadox
                         placedBdays[j][remaining - 1]++;
                         break;
                     }
+                }
+            }
+        }
+        
+        for (int i = 0; i < placedBdays.length; i++)
+        {
+            for (int j = 0; j < placedBdays[i].length; j++)
+            {
+                if (placedBdays[i][j] > 1)
+                {
+                    setTotalCollision(getTotalCollision() + (placedBdays[i][j] - 1));
                 }
             }
         }
@@ -110,6 +122,7 @@ public class BirthdayParadox
             }
             System.out.print("\n");
         }
+        System.out.println("Total Collusion Count:" + this.getTotalCollision());
     }
 
     public int[][] getBirthdayMatrix() throws Exception
@@ -121,5 +134,15 @@ public class BirthdayParadox
             init();
             return this.placedBdays;
         }
+    }
+
+    public int getTotalCollision()
+    {
+        return totalCollision;
+    }
+
+    public void setTotalCollision(int totalCollision)
+    {
+        this.totalCollision = totalCollision;
     }
 }
