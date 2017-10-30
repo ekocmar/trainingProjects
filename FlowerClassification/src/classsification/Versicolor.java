@@ -19,6 +19,14 @@ public class Versicolor extends Iris
     }
 
     /**
+     * 
+     */
+    public Versicolor(Iris obj)
+    {
+        this.setAttributes(obj.getAttributes());
+    }
+
+    /**
      * @param attributes
      */
     public Versicolor(double[] attributes)

@@ -19,6 +19,14 @@ public class Setosa extends Iris
     }
 
     /**
+     * 
+     */
+    public Setosa(Iris obj)
+    {
+        this.setAttributes(obj.getAttributes());
+    }
+
+    /**
      * @param attributes
      */
     public Setosa(double[] attributes)

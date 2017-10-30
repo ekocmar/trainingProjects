@@ -19,6 +19,14 @@ public class Virginica extends Iris
     }
 
     /**
+     * 
+     */
+    public Virginica(Iris obj)
+    {
+        this.setAttributes(obj.getAttributes());
+    }
+
+    /**
      * @param attributes
      */
     public Virginica(double[] attributes)

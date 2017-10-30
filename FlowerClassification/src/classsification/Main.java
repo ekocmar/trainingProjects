@@ -6,6 +6,7 @@ package classsification;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -21,14 +22,44 @@ public class Main
      */
     public static void main(String[] args) throws Exception
     {
-        ArrayList<Iris> arr = readFromFile();
-        System.out.println(arr.size());
+        String mDataFilePath = "resources\\data.txt";
+        ArrayList<Iris> mDataArr = readFromFile(mDataFilePath);
+        String tDataFilePath = "resources\\testdata.txt";
+        ArrayList<Iris> tDataArr = readFromFile(tDataFilePath);
+        // printDataList(mDataArr);
+
+        ArrayList<Iris> cDataArr = new ArrayList<Iris>();
+        for (Iris tIris : tDataArr)
+        {
+            if (tIris.calculateClass(mDataArr, 3).equalsIgnoreCase(Setosa.class.getSimpleName()))
+            {
+                Setosa setosa = new Setosa(tIris);
+                cDataArr.add(setosa);
+            }
+            else if (tIris.calculateClass(mDataArr, 3).equalsIgnoreCase(Versicolor.class.getSimpleName()))
+            {
+                Versicolor versicolor = new Versicolor(tIris);
+                cDataArr.add(versicolor);
+            }
+            else if (tIris.calculateClass(mDataArr, 3).equalsIgnoreCase(Virginica.class.getSimpleName()))
+            {
+                Virginica virginica = new Virginica(tIris);
+                cDataArr.add(virginica);
+            }
+        }
+        // printDataList(cDataArr);
+        DecimalFormat df = new DecimalFormat("#.##");
+        for (Iris iris : tDataArr.get(0).getClosestIrisList(mDataArr, 3))
+        {
+            System.out.println(iris.printAttributes() + "," + iris.getClass().getSimpleName() + " Distance:" + df.format(tDataArr.get(0).getDistance(iris)));
+        }
+
     }
 
-    public static ArrayList<Iris> readFromFile() throws Exception
+    public static ArrayList<Iris> readFromFile(String filePath) throws Exception
     {
         ArrayList<Iris> arrListFlowers = new ArrayList<Iris>();
-        File f = new File("resources\\data.txt");
+        File f = new File(filePath);
 
         FileReader fr = new FileReader(f);
         try (BufferedReader br = new BufferedReader(fr))
@@ -38,31 +69,49 @@ public class Main
             while ((sCurrentLine = br.readLine()) != null)
             {
                 String[] strArray = sCurrentLine.split(",");
-                double[] attributes = new double[4];
+                double[] attributes = new double[strArray.length - 1];
 
                 for (int i = 0; i < strArray.length - 1; i++)
                 {
                     attributes[i] = Double.valueOf(strArray[i]);
                 }
 
-                if (strArray[4].equalsIgnoreCase("Iris-setosa"))
+                if (strArray[strArray.length - 1].equalsIgnoreCase("Iris-setosa"))
                 {
                     Setosa s = new Setosa(attributes);
                     arrListFlowers.add(s);
                 }
-                else if (strArray[4].equalsIgnoreCase("Iris-versicolor"))
+                else if (strArray[strArray.length - 1].equalsIgnoreCase("Iris-versicolor"))
                 {
                     Versicolor v = new Versicolor(attributes);
                     arrListFlowers.add(v);
                 }
-                else if (strArray[4].equalsIgnoreCase("Iris-virginica"))
+                else if (strArray[strArray.length - 1].equalsIgnoreCase("Iris-virginica"))
                 {
                     Virginica virg = new Virginica(attributes);
                     arrListFlowers.add(virg);
+                }
+                else if (strArray[strArray.length - 1].equalsIgnoreCase("Iris"))
+                {
+                    Iris iris = new Iris(attributes);
+                    arrListFlowers.add(iris);
                 }
             }
         }
 
         return arrListFlowers;
+    }
+
+    private static void printDataList(ArrayList<Iris> arrayToPrint)
+    {
+        for (int i = 0; i < arrayToPrint.size(); i++)
+        {
+            System.out.print((i + 1) + ".item:");
+            for (double d : arrayToPrint.get(i).getAttributes())
+            {
+                System.out.print(d + ",");
+            }
+            System.out.println("Iris-" + arrayToPrint.get(i).getClass().getSimpleName().toLowerCase());
+        }
     }
 }
