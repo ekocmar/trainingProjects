@@ -15,10 +15,33 @@ public class Main
 
         ArrayList<Node> temp = nodesToArray(new ArrayList<Node>(), root);
 
-        for (Node node : temp)
+        for (int i = 0; i < temp.size(); i++)
         {
-            System.out.println(node.data);
+            System.out.println(temp.get(i).data);
         }
+
+        if (checkBST2(root))
+            System.out.println("Yes");
+        else
+            System.out.println("No");
+    }
+
+    public static boolean checkBST2(Node root)
+    {
+        ArrayList<Node> arrNodes = nodesToArray(new ArrayList<Node>(), root);
+        boolean retVal = true;
+        for (int i = 0; i < arrNodes.size(); i++)
+        {
+            if ((i + 1) < arrNodes.size())
+            {
+                if (arrNodes.get(i).data > arrNodes.get(i + 1).data)
+                {
+                    retVal = false;
+                    break;
+                }
+            }
+        }
+        return retVal;
     }
 
     public static boolean checkBST(Node root)
@@ -109,32 +132,24 @@ public class Main
         return retVal;
     }
 
-    public static ArrayList<Integer> convertArray(Node root)
+    public static ArrayList<Node> nodesToArray(ArrayList<Node> nodeArray, Node node)
     {
-        ArrayList<Integer> retArray = new ArrayList<Integer>();
-        ArrayList<Node> nodeArray = new ArrayList<Node>();
-
-        return retArray;
-    }
-
-    public static ArrayList<Node> nodesToArray(ArrayList<Node> nodeArray, Node root)
-    {
-        if (root.left == null && root.right == null)
+        if (node.left == null && node.right == null)
         {
-            nodeArray.add(root);
+            nodeArray.add(node);
             return nodeArray;
         }
         else
         {
             ArrayList<Node> tmp = nodeArray;
-            if (root.left != null)
+            if (node.left != null)
             {
-                tmp = nodesToArray(tmp, root.left);
+                tmp = nodesToArray(tmp, node.left);
             }
-            tmp.add(root);
-            if (root.right != null)
+            tmp.add(node);
+            if (node.right != null)
             {
-                tmp = nodesToArray(tmp, root.right);
+                tmp = nodesToArray(tmp, node.right);
             }
             return tmp;
         }
