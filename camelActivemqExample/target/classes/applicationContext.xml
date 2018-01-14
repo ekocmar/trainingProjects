@@ -18,6 +18,9 @@
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="pooledConnectionFactory" />
 	</bean>
+	<bean id="testBean" class="com.javacodegeeks.camel.TestBean" />
+	<bean id="aggStrategy" class="com.javacodegeeks.camel.MyAggregator" />
+	<bean id="finalProcessor" class="com.javacodegeeks.camel.FinalProcessor" />
 
 	<camelContext xmlns="http://camel.apache.org/schema/spring">
 		<route>
@@ -29,14 +32,39 @@
 		</route>
 
 		<route>
-			<from uri="activemq:queue:in" />
-			<log message="Route message from inbox to outbox queue with data ${body}" />
+			<from
+				uri="activemq:queue:in?asyncConsumer=true&amp;concurrentConsumers=10" />
+			<to uri="bean:testBean?method=hello" />
+			<!-- <log message="Route message from inbox to outbox queue with data 
+				${body}" /> -->
 			<to uri="activemq:queue:out" />
 		</route>
-		
+
 		<route>
-			<from uri="activemq:queue:out" />
-			<log message="Print the message from out to console"/>
+			<from
+				uri="activemq:queue:out?asyncConsumer=true&amp;concurrentConsumers=10" />
+			<to uri="bean:testBean?method=hello" />
+			<!-- <log message="Print the message from out to console"/> -->
+			<to uri="direct:aggregate" />
+		</route>
+		<route>
+			<from uri="direct:aggregate" />
+			<aggregate strategyRef="aggStrategy">
+				<correlationExpression>
+					<constant>true</constant>
+				</correlationExpression>
+				<completionSize>
+					<constant>15</constant>
+				</completionSize>
+				<transform>
+					<simple>The result is: ${body}</simple>
+				</transform>
+				<to uri="direct:finalize" />
+			</aggregate>
+		</route>
+		<route>
+			<from uri="direct:finalize" />
+			<process ref="finalProcessor" />
 			<to uri="stream:out" />
 		</route>
 

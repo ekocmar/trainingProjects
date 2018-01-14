@@ -13,7 +13,7 @@ public class CamelActivemqExampleUsingSpring {
 				appContext, false);
 		try {
 			camelContext.start();
-			Thread.sleep(2000);
+            Thread.sleep(20000);
 		} finally {
 			camelContext.stop();
 		}
