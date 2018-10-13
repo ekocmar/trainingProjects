@@ -35,7 +35,7 @@
 			<from
 				uri="activemq:queue:in?asyncConsumer=true&amp;concurrentConsumers=10" />
 			<to uri="bean:testBean?method=hello" />
-			<!-- <log message="Route message from inbox to outbox queue with data 
+			<!-- <log message="Route message from inbox to  outbox queue with data 
 				${body}" /> -->
 			<to uri="activemq:queue:out" />
 		</route>
